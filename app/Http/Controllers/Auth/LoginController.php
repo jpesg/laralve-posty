@@ -25,7 +25,7 @@ class LoginController extends Controller
         ]);;//throw exception --> send errors to frontend
 
         //sign user in
-        if(!auth()->attempt($request->only('email', 'password'))){
+        if(!auth()->attempt($request->only('email', 'password'), $request->remember)){
             return back()->with('status', 'Invalid login details');
         }
 
