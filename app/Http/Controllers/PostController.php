@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 //php artisan make:model Post -m -f
 class PostController extends Controller
 {
+    public function __constructor(){
+        $this->middleware(['auth'])->only(['store', 'destroy']);
+    }
     public function index()
     {
         //$post = Post::orderBy('created_at', 'desc')->with(['user', 'likes'])->paginate(20);
