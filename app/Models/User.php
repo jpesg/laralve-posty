@@ -54,4 +54,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    public function receivedLikes(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(Like::class, Post::class);
+    }
+
 }
