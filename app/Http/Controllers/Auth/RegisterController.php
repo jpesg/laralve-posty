@@ -12,6 +12,11 @@ use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['guest']);
+    }
+
     public function index()
     {
         return view('auth.register');
@@ -20,7 +25,8 @@ class RegisterController extends Controller
     /**
      * @throws ValidationException
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         //validate
         $this->validate($request, [
             'name' => 'required|max:255',
@@ -38,7 +44,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
         //sign user in
-         auth()->attempt($request->only('email', 'password'));//returns User model
+        auth()->attempt($request->only('email', 'password'));//returns User model
         //redirect
         return redirect()->route('dashboard');
     }
