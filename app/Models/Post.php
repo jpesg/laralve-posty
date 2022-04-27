@@ -28,4 +28,9 @@ class Post extends Model
     {
         return $this->likes->contains('user_id', $user->id);
     }
+
+    public function ownedBy(User $user): bool
+    {
+        return $this->user_id === $user->id;
+    }
 }
