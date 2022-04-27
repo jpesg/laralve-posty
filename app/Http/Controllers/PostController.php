@@ -38,12 +38,16 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+//php artisan make:policy PostPolicy
+
     public function destroy(Post $post, Request $request)
     {
+        //using policies
+        $this->authorize('delete', $post);
         /*if ($post->ownedBy($request->user())) {
             $post->delete();
         }*/
-
+        $post->delete();
         return back();
     }
 }
